@@ -1,0 +1,124 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Best Ramen Shop - Customers</title>
+    </head>
+    <body>
+        <header>
+            Best Ramen Shop
+        </header>
+    </body>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="orders.html">Orders</a> 
+        <a href="customers.html">Customers</a>
+        <a href="employees.html">Employees</a>
+        <a href="menuitems.html">Menu</a>
+        <a href="inventoryitems.html">Inventory</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="items_ordered.html">Items on Orders</a>
+        <a href="order_employees.html">Employees on Orders</a>
+    </div>
+    <body>
+        <h2>Employees</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <th>Steven</th>
+                    <th>802-878-8888</th>
+                    <th>stev@mail.net</th>
+                    <th>1001 Stempletn Street </th>
+                    <th>Paper Guy</th>
+                    <th><a href="">Delete</a></th>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <th>Jusut</th>
+                    <th>8981841884</th>
+                    <th>jes@yahmail.org</th>
+                    <th>989897 Strong Lane</th>
+                    <th>Printer Guy</th>
+                    <th><a href="">Delete</a></th>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <th>Sample Individual</th>
+                    <th>000-000-0000</th>
+                    <th>sample@doe.li</th>
+                    <th>Sample Street</th>
+                    <th>Chef/Owner</th>
+                    <th><a href="">Delete</a></th>
+                </tr>
+            </tbody>
+        </table>
+        <form action="CREATE">
+        <h4>Add Employee</h4>
+            <p>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </p>
+            <p>
+                <label for="phone">Phone Number</label>
+                <input type="text" name="phone" id="phone">
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+            </p>
+            <p>
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address">
+            </p>
+            <p>
+                <label for="role">Role</label>
+                <input type="text" name="role" id="role">
+            </p>
+            <p><button>Add</button></p>
+        </form>
+        <br>
+        <form action="UPDATE">
+        <h4>Update Employee</h4>
+            <p>
+                <label for="employeeID">Which Employee?</label>
+                <select name="employeeID" id="employeeID">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </p>
+            <p>
+                <label for="name">Update Name</label>
+                <input type="text" name="name" id="name">
+            </p>
+            <p>
+                <label for="phone">Update Phone Number</label>
+                <input type="text" name="phone" id="phone">
+            </p>
+            <p>
+                <label for="email">Update Email</label>
+                <input type="text" name="email" id="email">
+            </p>
+            <p>
+                <label for="address">Update Address</label>
+                <input type="text" name="address" id="address">
+            </p>
+            <p>
+                <label for="role">Update Role</label>
+                <input type="text" name="role" id="role">
+            </p>
+            <p><button>Update</button></p>
+        </form>
+    </body>
+</html>

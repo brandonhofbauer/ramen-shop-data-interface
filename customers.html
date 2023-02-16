@@ -1,0 +1,112 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Best Ramen Shop - Customers</title>
+    </head>
+    <body>
+        <header>
+            Best Ramen Shop
+        </header>
+    </body>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="orders.html">Orders</a> 
+        <a href="customers.html">Customers</a>
+        <a href="employees.html">Employees</a>
+        <a href="menuitems.html">Menu</a>
+        <a href="inventoryitems.html">Inventory</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="items_ordered.html">Items on Orders</a>
+        <a href="order_employees.html">Employees on Orders</a>
+    </div>
+    <body>
+        <h2>Customers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <th>Emily</th>
+                    <th>972-409-5505</th>
+                    <th>emil@gamail.net</th>
+                    <th>1101 Sampelton Street</th>
+                    <th><a href="">Delete</a></th>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <th>Philip</th>
+                    <th>3601234567</th>
+                    <th>pihilip@email.com</th>
+                    <th>123 Address St</th>
+                    <th><a href="">Delete</a></th>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <th>VAGUE</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><a href="">Delete</a></th>
+                </tr>
+            </tbody>
+        </table>
+        <form action="CREATE">
+        <h4>Add Customer</h4>
+            <p>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </p>
+            <p>
+                <label for="phone">Phone Number</label>
+                <input type="text" name="phone" id="phone">
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+            </p>
+            <p>
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address">
+            </p>
+            <p><button>Add</button></p>
+        </form>
+        <br>
+        <form action="UPDATE">
+        <h4>Update Customer</h4>
+            <p>
+                <label for="customerID">Which Customer?</label>
+                <select name="customerID" id="customerID">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </p>
+            <p>
+                <label for="name">Update Name</label>
+                <input type="text" name="name" id="name">
+            </p>
+            <p>
+                <label for="phone">Update Phone Number</label>
+                <input type="text" name="phone" id="phone">
+            </p>
+            <p>
+                <label for="email">Update Email</label>
+                <input type="text" name="email" id="email">
+            </p>
+            <p>
+                <label for="address">Update Address</label>
+                <input type="text" name="address" id="address">
+            </p>
+            <p><button>Update</button></p>
+        </form>
+    </body>
+</html>

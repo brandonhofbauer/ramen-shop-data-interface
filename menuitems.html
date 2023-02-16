@@ -1,0 +1,107 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Menu</title>
+    </head>
+    <body>
+        <h1>Best Ramen Shop</h1>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="orders.html">Orders</a> 
+            <a href="customers.html">Customers</a>
+            <a href="employees.html">Employees</a>
+            <a href="menuitems.html">Menu</a>
+            <a href="inventoryitems.html">Inventory</a>
+            <a href="recipes.html">Recipes</a>
+        </div>
+        <article>
+            <h2>Menu Items</h2>
+            <p>View Menu Below</p>
+            <div id="browse">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Menu ID</th>
+                            <th>Item</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Veggie Water</td>
+                            <td>Vegetarian</td>
+                            <td>80.99</td>
+                            <td>
+                                <a href="#" onClick="deleteItem()">delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Steak Noodles</td>
+                            <td>Non-Vegetarian</td>
+                            <td>17.99</td>
+                            <td>
+                                <a href="#">delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Vegan Steak Noodles</td>
+                            <td>Vegan</td>
+                            <td>20.99</td>
+                            <td>
+                                <a href="#">delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Add a Menu Listing</h3>
+            <div id="create">
+                <form method="POST" id="addMenu">
+                    <label for="item">Item:</label>
+                    <br>
+                    <input type="text" id="item" name="item">
+                    <br>
+                    <label for="type">Type:</label>
+                    <br>
+                    <input type="text" id="type" name="type">
+                    <br>
+                    <label for="price">Price:</label>
+                    <br>
+                    <input type="number" id="price" name="quantity">
+                    <br>
+                    <button>Submit Addition</button>
+                </form>
+            </div>
+            <h3>Update a Menu Listing</h3>
+            <div id="update">
+                <form method="POST" id="updateInventory">
+                    <label for="inventory_id">Choose an Item</label>
+                    <select id="inventory_id" name="inventory_id">
+                        <option value="0">None</option>
+                        <option value="1" selected>Veggie Water</option>
+                        <option value="2">Steak Noodles</option>
+                    </select>
+                    <br>
+                    <label for="item">Item:</label>
+                    <br>
+                    <input type="text" id="item" name="item">
+                    <br>
+                    <label for="type">Type:</label>
+                    <br>
+                    <input type="text" id="type" name="type">
+                    <br>
+                    <label for="price">Price:</label>
+                    <br>
+                    <input type="number" id="price" name="quantity">
+                    <br>
+                    <button>Submit Update</button>
+                </form>
+            </div>
+        </article>
+    </body>
+</html>

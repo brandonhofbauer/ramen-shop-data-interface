@@ -1,0 +1,118 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Recipes</title>
+    </head>
+    <body>
+        <h1>Best Ramen Shop</h1>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="orders.html">Orders</a> 
+            <a href="customers.html">Customers</a>
+            <a href="employees.html">Employees</a>
+            <a href="menuitems.html">Menu</a>
+            <a href="inventoryitems.html">Inventory</a>
+            <a href="recipes.html">Recipes</a>
+        </div>
+        <article>
+            <h2>Recipe Components</h2>
+            <p>View Recipe Components Below</p>
+            <div id="browse">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Recipe ID</th>
+                            <th>Menu ID</th>
+                            <th>Inventory ID</th>
+                            <th>Required Amount From Inventory</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1 (Veggie Water)</td>
+                            <td>3 (Siracha)</td>
+                            <td>3</td>
+                            <td>
+                                <a href="#" onClick="deleteItem()">delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1 (Veggie Water)</td>
+                            <td>4 (Celery)</td>
+                            <td>1</td>
+                            <td>
+                                <a href="#">delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Add a Recipe Component</h3>
+            <p>
+                Note! You can only choose from existing menu and inventory items!
+                If you want to make a new Menu listing, navigate to the Menu tab.
+            </p>
+            <div id="create">
+                <form method="POST" id="addMenu">
+                    <label for="menu">Menu Item:</label>
+                    <br>
+                    <select id="menu" name="menu">
+                        <option value="0">None</option>
+                        <option value="1" selected>Veggie Water</option>
+                    </select>
+                    <br>
+                    <label for="inventory">Inventory Item:</label>
+                    <br>
+                    <select id="inventory" name="inventory">
+                        <option value="0">None</option>
+                        <option value="1">Noodles</option>
+                        <option value="2">Spoons</option>
+                        <option value="3">Siracha</option>
+                        <option value="4">Celery</option>
+                        <option value="5" selected>Steak</option>
+                    </select>
+                    <br>
+                    <label for="amount">Amount:</label>
+                    <br>
+                    <input type="number" id="amount" name="amount">
+                    <br>
+                    <button>Submit Addition</button>
+                </form>
+            </div>
+            <h3>Update a Recipe Component</h3>
+            <p>
+                Only use this form for existing components!
+            </p>
+            <div id="update">
+                <form method="POST" id="updateInventory">
+                    <label for="menu">Menu Item:</label>
+                    <br>
+                    <select id="menu" name="menu">
+                        <option value="0">None</option>
+                        <option value="1" selected>Veggie Water</option>
+                    </select>
+                    <br>
+                    <label for="inventory">Inventory Item:</label>
+                    <br>
+                    <select id="inventory" name="inventory">
+                        <option value="0">None</option>
+                        <option value="1">Noodles</option>
+                        <option value="2">Spoons</option>
+                        <option value="3">Siracha</option>
+                        <option value="4">Celery</option>
+                        <option value="5" selected>Steak</option>
+                    </select>
+                    <br>
+                    <label for="amount">Amount:</label>
+                    <br>
+                    <input type="number" id="amount" name="amount">
+                    <br>
+                    <button>Submit Update</button>
+                </form>
+            </div>
+        </article>
+    </body>
+</html>

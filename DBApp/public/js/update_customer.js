@@ -72,22 +72,34 @@ function updateRow(data, customerID){
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == customerID) {
-
+        
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td to update and reassign to value
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
-            td1.innerHTML = parsedData.name; 
+            td1.innerHTML = parsedData[0].name; 
 
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
-            td2.innerHTML = parsedData.phone; 
+            td2.innerHTML = parsedData[0].phone; 
 
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
-            td3.innerHTML = parsedData.email; 
+            td3.innerHTML = parsedData[0].email; 
 
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
-            td4.innerHTML = parsedData.address; 
+            td4.innerHTML = parsedData[0].address; 
        }
+    }
+
+    updateDropDownMenu(customerID, parsedData[0].name);
+}
+
+function updateDropDownMenu(customerID, customerName){
+    let selectMenu = document.getElementById("mySelect");
+    for (let i = 0; i < selectMenu.length; i++){
+        if (Number(selectMenu.options[i].value) === Number(customerID)){
+            selectMenu.options[i].text = customerName;
+            break;
+        } 
     }
 }

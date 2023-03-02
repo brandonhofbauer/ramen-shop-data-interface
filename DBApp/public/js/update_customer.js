@@ -9,10 +9,10 @@ updateCustomerForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputCustomer = document.getElementById("mySelect");
-    let inputName = document.getElementById("input-name");
-    let inputPhone = document.getElementById("input-phone");
-    let inputEmail = document.getElementById("input-email");
-    let inputAddress = document.getElementById("input-address");
+    let inputName = document.getElementById("input-name1");
+    let inputPhone = document.getElementById("input-phone1");
+    let inputEmail = document.getElementById("input-email1");
+    let inputAddress = document.getElementById("input-address1");
 
     // Get the values from the form fields
     let customerValue = inputCustomer.value;
@@ -24,7 +24,7 @@ updateCustomerForm.addEventListener("submit", function (e) {
     // currently the database table for Customers does not allow updating name values to NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(nameValue)) 
+    if (nameValue === null) 
     {
         return;
     }

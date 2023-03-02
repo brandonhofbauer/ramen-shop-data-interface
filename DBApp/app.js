@@ -111,7 +111,7 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
   app.put('/put-customer-ajax', function(req,res,next){
     let data = req.body;
 
-    let customerID = data.id;
+    let customerID = data.customer;
     let name = data.name;
     let phone = data.phone;
     let email = data.email;
@@ -119,7 +119,7 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
   
     let updateCustomer = `UPDATE Customers SET name = ?, phone = ?, email = ?, address = ? WHERE Customers.customerID = ?`;
     let selectCustomer = `SELECT * FROM Customers WHERE customerID = ?`
-  
+
           // Run the 1st query
           db.pool.query(updateCustomer, [name, phone, email, address, customerID], function(error, rows, fields){
               if (error) {

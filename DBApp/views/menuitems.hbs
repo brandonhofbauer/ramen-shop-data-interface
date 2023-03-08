@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>Menu Items</title>
+</head>
+
+<body>
+<div class="navbar"> <!-- navbar -->
+    <a href="/">Customers</a>
+    <a href="/orders">Orders</a> 
+    <a href="/employees">Employees</a>
+    <a class ="active" href="/menuitems">Menu</a>
+    <a href="/recipes">Recipes</a>
+    <a href="/inventoryitems">Inventory Items</a>
+    <a href="/items_ordered">Items on Orders</a>
+    <a href="/order_employees">Employees on Orders</a>
+</div>
+
+<table id="menu-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each data}}
+        <tr data-value="{{this.menuID}}">
+            <td>{{this.menuID}}</td>
+            <td>{{this.item}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.price}}</td>
+            <td><button onclick="deleteMenu({{this.menuID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_menu.js"></script>
+
+</body>
+</html>

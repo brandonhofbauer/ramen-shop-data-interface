@@ -31,6 +31,35 @@ app.get('/', function(req, res)
         })                                      // Note the call to render() and not send(). Using render() ensures the templating engine
     });                                         // will process this file, before sending the finished HTML to the client.
 
+app.get('/employees', function(req, res){
+    res.render('employees')
+    });
+
+app.get('/items_ordered', function(req, res){
+    res.render('items_ordered')
+    });
+
+app.get('/menuitems', function(req, res)
+    {
+        res.render('menuitems')
+    });
+
+app.get('/order_employees', function(req, res){
+    res.render('order_employees')
+    });
+
+app.get('/orders', function(req, res){
+    res.render('orders')
+    });
+
+app.get('/recipes', function(req, res){
+    res.render('recipes')
+    });
+
+app.get('/inventoryitems', function(req, res){
+    res.render('inventoryitems')
+    });
+
 app.post('/add-customer-ajax', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object

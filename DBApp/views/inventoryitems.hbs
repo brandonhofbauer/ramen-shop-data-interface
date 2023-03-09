@@ -16,5 +16,76 @@
     <a href="/order_employees">Employees on Orders</a>
 </div>
 
+<h2>Understand that deleting an item from the inventory will also irreparably remove any associated recipe components using the item! </h2>
+<table id="inventory-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each data}}
+        <tr data-value="{{this.inventoryID}}">
+            <td>{{this.inventoryID}}</td>
+            <td>{{this.item}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.quantity}}</td>
+            <td><button onclick="deleteInventory({{this.inventoryID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_inventory.js"></script>
+
+<h2>Add a Inventory Item</h2>
+<p>To add a new item, please enter the information below and click 'Submit'!</p>
+<form id="add-inventory-form-ajax">
+    <label for="input-item">Item: </label>
+    <input type="text" name="input-item" id="input-item">
+    
+    <label for="input-type">Type: </label>
+    <input type="text" name="input-type" id="input-type">
+
+    <label for="input-quantity">Quantity: </label>
+    <input type="text" name="input-quantity" id="input-quantity">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_inventory.js"></script>
+
+<h2>Update an Inventory Form</h2>
+<form id="update-inventory-form-ajax">
+
+    <label for="input-inventory">Inventory Item: </label>
+    <select name="input-inventory" id="mySelect">
+        <option value="test">Select an Inventory Item</option>
+        {{#each data}}
+        <option value="{{this.inventoryID}}">{{this.item}}</option>
+        {{/each}}
+    </select>
+    <br>
+    <label for="input-item">Item: </label>
+    <input type="text" name="input-item" id="input-item1">
+    
+    <label for="input-type">Type: </label>
+    <input type="text" name="input-type" id="input-type1">
+
+    <label for="input-quantity">Quantity: </label>
+    <input type="text" name="input-quantity" id="input-quantity1">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_inventory.js"></script>
+
 </body>
 </html>

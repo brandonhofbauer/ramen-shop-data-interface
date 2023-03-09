@@ -42,5 +42,45 @@
 </table>
 <script src="./js/delete_menu.js"></script>
 
+<h2>Add a New Menu Item</h2>
+<p>To add a new menu item, please enter their information below and click 'Submit'!</p>
+<form id="add-menu-form-ajax">
+    <label for="input-item">Item: </label>
+    <input type="text" name="input-item" id="input-item">
+    
+    <label for="input-type">Type: </label>
+    <input type="text" name="input-type" id="input-type">
+
+    <label for="input-email">Price: </label>
+    <input type="text" name="input-price" id="input-price">
+
+    <input type="submit">
+</form>
+<script src="./js/add_menu.js"></script>
+
+<h2>Update an Existing Menu Item</h2>
+<form id="update-menu-form-ajax">
+
+    <label for="input-menu">Menu: </label>
+    <select name="input-menu" id="mySelect">
+        <option value="test">Select a Menu Item</option>
+        {{#each data}}
+        <option value="{{this.menuID}}">{{this.item}}</option>
+        {{/each}}
+    </select>
+    <br>
+    <label for="input-item">Item: </label>
+    <input type="text" name="input-item" id="input-item1">
+    
+    <label for="input-type">Type: </label>
+    <input type="text" name="input-type" id="input-type1">
+
+    <label for="input-price">Price: </label>
+    <input type="text" name="input-price" id="input-price1">
+
+    <input type="submit">
+</form>
+<script src="./js/update_menu.js"></script>
+
 </body>
 </html>

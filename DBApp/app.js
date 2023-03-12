@@ -532,6 +532,86 @@ let selectCustomer = `SELECT * FROM Customers WHERE customerID = ?`
               }
   })});
 
+app.put('/put-menu-ajax', function(req,res,next){
+    let data = req.body;
+
+    let menuID = data.menu;
+    let item = data.item;
+    let type = data.type;
+    let price = data.price;
+
+    let updateMenu = `UPDATE MenuItems SET item = ?, type = ?, price = ? WHERE MenuItems.menuID = ?`;
+    let selectMenu = `SELECT * FROM MenuItems WHERE menuID = ?`
+
+            db.pool.query(updateMenu, [item, type, price, menuID], function(error, rows, fields){
+                if (error) {
+
+                console.log(error);
+                res.sendStatus(400);
+                } else {
+                    db.pool.query(selectMenu, [menuID], function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+})});
+
+app.put('/put-inventory-ajax', function(req,res,next){
+    let data = req.body;
+
+    let inventoryID = data.inventory;
+    let item = data.item;
+    let type = data.type;
+    let quantity = data.quantity;
+
+    let updateInventory = `UPDATE InventoryItems SET item = ?, type = ?, quantity = ? WHERE InventoryItems.inventoryID = ?`;
+    let selectInventory = `SELECT * FROM InventoryItems WHERE inventoryID = ?`
+            db.pool.query(updateInventory, [item, type, quantity, inventoryID], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    db.pool.query(selectInventory, [inventoryID], function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+})});
+
+app.put('/put-recipe-ajax', function(req,res,next){
+    let data = req.body;
+
+    let recipeID = data.recipe;
+    let menu = data.menu;
+    let inventory = data.inventory;
+    let reqAmt = data.reqAmt;
+
+    let updateRecipe = `UPDATE Recipes SET menuID = ?, inventoryID = ?, reqAmt = ? WHERE Recipes.recipeID = ?`;
+    let selectRecipe = `SELECT * FROM Recipes WHERE recipeID = ?`
+            db.pool.query(updateRecipe, [menu, inventory, reqAmt, recipeID], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    db.pool.query(selectRecipe, [recipeID], function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+})});
+
 /*
     LISTENER
 */

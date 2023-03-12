@@ -32,7 +32,10 @@ app.get('/', function(req, res)
     });                                         // will process this file, before sending the finished HTML to the client.
 
 app.get('/employees', function(req, res){
-    res.render('employees')
+    let query1 = "SELECT * FROM Employees;";
+    db.pool.query(query1, function(error, rows, fields){
+        res.render('employees', {data: rows});
+    })
     });
 
 app.get('/items_ordered', function(req, res){
@@ -45,11 +48,31 @@ app.get('/menuitems', function(req, res)
     });
 
 app.get('/order_employees', function(req, res){
-    res.render('order_employees')
+    let query1 = ("SELECT * FROM Order_Employees;");
+    let query2 = ("SELECT * FROM Orders;");
+    let query3 = ("SELECT * FROM Employees;");
+    db.pool.query(query1, function(error, rows, fields){
+        let data = rows;
+        db.pool.query(query2, function(error, rows, fields){
+            let orders = rows;
+            db.pool.query(query3, function(error, rows, fields){
+                let employees = rows;
+                res.render('order_employees', {data: data, orders: orders, employees: employees})
+            })
+        })
+    })
     });
 
 app.get('/orders', function(req, res){
-    res.render('orders')
+    let query1 = ("SELECT * FROM Orders;");
+    let query2 = ("SELECT * FROM Customers;");
+    db.pool.query(query1, function(error, rows, fields){
+        let data = rows;
+        db.pool.query(query2, function(error, rows, fields){
+            let customers = rows;
+            res.render('orders', {data: data, customers: customers});
+        })
+    })
     });
 
 app.get('/recipes', function(req, res){
@@ -106,6 +129,117 @@ app.post('/add-customer-ajax', function(req, res)
     })
 });
 
+app.post('/add-employee-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Employees (name, phone, email, address, role) VALUES ('${data.name}', '${data.phone}', '${data.email}', '${data.address}', '${data.role}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on Customers
+            query2 = `SELECT * FROM Employees;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+app.post('/add-order-employee-ajax', function(req, res){
+    let data = req.body
+
+    query1 = `INSERT INTO Order_Employees (orderID, employeeID) VALUES ('${data.orderID}', '${data.employeeID}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on Orders
+            query2 = `SELECT * FROM Order_Employees;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+app.post('/add-order-ajax', function(req, res){
+    let data = req.body
+
+    query1 = `INSERT INTO Orders (customerID, totalPrice, orderOn) VALUES ('${data.CID}', '${data.totalPrice}', '${data.orderOn}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on Orders
+            query2 = `SELECT * FROM Orders;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
 app.delete('/delete-customer-ajax/', function(req,res,next){
     let data = req.body;
     let customerID = parseInt(data.id);
@@ -137,6 +271,57 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
               }
   })});
 
+  app.delete('/delete-employee-ajax/', function(req,res,next){
+    let data = req.body;
+    let employeeID = parseInt(data.id);
+    //let updateOrders = `UPDATE Orders SET employeeID = NULL WHERE employeeID = ?`;
+    let deleteEmployee= `DELETE FROM Employees WHERE employeeID = ?`;
+  
+  
+          // Run the 1st query
+            db.pool.query(deleteEmployee, [employeeID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            })
+        });
+app.delete('/delete-order-employee-ajax/', function(req,res,next){
+    let data = req.body;
+    let orderemployeesID = parseInt(data.orderemployeesID);
+    let deleteOrderEmployee= `DELETE FROM Order_Employees WHERE orderemployeesID = ${orderemployeesID}`;
+  
+  
+          // Run the 1st query
+            db.pool.query(deleteOrderEmployee, function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            })
+    });
+  app.delete('/delete-order-ajax/', function(req,res,next){
+    let data = req.body;
+    let orderID = parseInt(data.id);
+    let deleteOrder= `DELETE FROM Orders WHERE orderID = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteOrder, [orderID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else {res.sendStatus(204)}
+  })});
+
   app.put('/put-customer-ajax', function(req,res,next){
     let data = req.body;
 
@@ -164,6 +349,81 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
               {
                   // Run the second query
                   db.pool.query(selectCustomer, [customerID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+  })});
+  
+  app.put('/put-employee-ajax', function(req,res,next){
+    let data = req.body;
+
+    let employeeID = data.employee;
+    let name = data.name;
+    let phone = data.phone;
+    let email = data.email;
+    let address = data.address;
+    let role = data.role;
+  
+    let updateEmployee = `UPDATE Employees SET name = ?, phone = ?, email = ?, address = ?, role = ? WHERE Employees.employeeID = ?`;
+    let selectEmployee = `SELECT * FROM Employees WHERE employeeID = ?`
+
+          // Run the 1st query
+          db.pool.query(updateEmployee, [name, phone, email, address, role, employeeID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectEmployee, [employeeID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+  })});
+  app.put('/put-order-ajax', function(req,res,next){
+    let data = req.body;
+
+    let orderID = data.orderID;
+    let customerID = data.CID;
+    let totalPrice = data.totalPrice;
+    let orderOn = data.orderOn;
+  
+    let updateOrder = `UPDATE Orders SET customerID = ?, totalPrice = ?, orderOn = ? WHERE Orders.orderID = ?`;
+    let selectOrder = `SELECT * FROM Orders WHERE orderID = ?`
+
+          // Run the 1st query
+          db.pool.query(updateOrder, [customerID, totalPrice, orderOn, orderID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectOrder, [orderID], function(error, rows, fields) {
   
                       if (error) {
                           console.log(error);

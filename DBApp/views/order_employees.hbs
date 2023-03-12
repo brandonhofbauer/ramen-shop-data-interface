@@ -15,6 +15,64 @@
     <a href="/items_ordered">Items on Orders</a>
     <a class ="active" href="/order_employees">Employees on Orders</a>
 </div>
+<table id="order-employee-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the attributes, in order --}}
+        {{#each data}}
+        <tr data-value= {{this.orderemployeesID}}>
+            <td>{{this.orderemployeesID}}</td>
+            <td>{{this.orderID}}</td>
+            <td>{{this.employeeID}}</td>
+            <td><button onclick="deleteOrderEmployee({{this.orderemployeesID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_order_employee.js"></script>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a New Employee to Order</h2>
+<p>To add a new order, please enter their information below and click 'Submit'!</p>
+<form id="add-order-employee-form-ajax">
+    <label for="input-orderID">Order: </label>
+    <select name="input-orderID" id="input-orderID">
+        <option value="None">Select an Order</option>
+        {{#each orders}}
+        <option value="{{this.orderID}}">{{this.orderOn}} (ID: {{this.orderID}})</option>
+        {{/each}}
+    </select>
+
+    <label for="input-employeeID">Order: </label>
+    <select name="input-employeeID" id="input-employeeID">
+        <option value="None">Select an Employee</option>
+        {{#each employees}}
+        <option value="{{this.employeeID}}">{{this.name}} (ID: {{this.employeeID}})</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_order_employee.js"></script>
 
 </body>
 </html>

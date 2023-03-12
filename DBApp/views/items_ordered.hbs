@@ -16,5 +16,45 @@
     <a href="/order_employees">Employees on Orders</a>
 </div>
 
+<table id="itemsordered-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each data}}
+        <tr data-value="{{this.itemsorderedID}}">
+            <td>{{this.itemsorderedID}}</td>
+            <td>{{this.orderID}}</td>
+            <td>{{this.menuID}}</td>
+            <td><button onclick="deleteItemsOrdered({{this.itemsorderedID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_itemsordered.js"></script>
+
+<h2>Add a Item to an Order</h2>
+<p>To add an item to an existing order, please enter the information below and click 'Submit'!</p>
+<form id="add-itemsordered-ajax">
+    <label for="input-order">Order (an existing one!): </label>
+    <input type="text" name="input-order" id="input-order">
+    
+    <label for="input-menu">Menu Item: </label>
+    <input type="text" name="input-menu" id="input-menu">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_itemsordered.js"></script>
+
 </body>
 </html>

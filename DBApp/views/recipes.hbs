@@ -16,5 +16,71 @@
     <a href="/order_employees">Employees on Orders</a>
 </div>
 
+<table id="recipes-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each data}}
+        <tr data-value="{{this.recipeID}}">
+            <td>{{this.recipeID}}</td>
+            <td>{{this.menuID}}</td>
+            <td>{{this.inventoryID}}</td>
+            <td>{{this.reqAmt}}</td>
+            <td><button onclick="deleteMenu({{this.recipeID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_recipe.js"></script>
+
+<h2>Add a Recipe Component</h2>
+<p>To add a new recipe component, please enter information below and click 'Submit'!</p>
+<form id="add-recipe-form-ajax">
+    <label for="input-menu">MenuID: </label>
+    <input type="text" name="input-menu" id="input-menu">
+    
+    <label for="input-inventory">InventoryID: </label>
+    <input type="text" name="input-inventory" id="input-inventory">
+
+    <label for="input-reqAmt">Required Amount: </label>
+    <input type="text" name="input-reqAmt" id="input-reqAmt">
+
+    <input type="submit">
+</form>
+<script src="./js/add_recipe.js"></script>
+
+<h2>Update a Customer Form</h2>
+<form id="update-recipe-form-ajax">
+
+    <label for="input-recipe">Recipe: </label>
+    <select name="input-recipe" id="mySelect">
+        <option value="test">Select a Recipe Component</option>
+        {{#each data}}
+        <option value="{{this.recipeID}}">{{this.menuID}}, {{this.inventoryID}}</option>
+        {{/each}}
+    </select>
+    <br>
+    <label for="input-menu">MenuID: </label>
+    <input type="text" name="input-menu" id="input-menu1">
+    
+    <label for="input-inventory">InventoryID: </label>
+    <input type="text" name="input-inventory" id="input-inventory1">
+
+    <label for="input-reqAmt">Required Amount: </label>
+    <input type="text" name="input-reqAmt" id="input-reqAmt1">
+
+    <input type="submit">
+</form>
+<script src="./js/update_recipe.js"></script>
+
 </body>
 </html>

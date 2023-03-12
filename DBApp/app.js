@@ -532,6 +532,72 @@ let selectCustomer = `SELECT * FROM Customers WHERE customerID = ?`
               }
   })});
 
+  app.put('/put-employee-ajax', function(req, res, next){
+    let data = req.body;
+
+    let employeeID = data.employee;
+    let name = data.name;
+    let phone = data.phone;
+    let email = data.email;
+    let address = data.address;
+    let role = data.role;
+
+    let updateEmployee = `UPDATE Employees SET name = ?, phone = ?, email = ?, address = ?, role = ? WHERE Employees.employeeID = ?`;
+    let selectEmployee = `SELECT * FROM Employees WHERE employeeID = ?`
+
+        // Run the 1st query
+        db.pool.query(updateEmployee, [name, phone, email, address, role, employeeID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectEmployee, [employeeID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+  })});
+
+  app.put('/put-order-ajax', function(req, res, next){
+    let data = req.body;
+
+    let orderID = data.orderID;
+    let customerID = data.CID;
+    let totalPrice = data.totalPrice;
+    let orderOn = data.orderOn;
+
+    let updateOrder = `UPDATE Orders SET customerID = ?, totalPrice = ?, orderOn = ? WHERE Orders.orderID = ?`;
+    let selectOrder = `SELECT * FROM Orders WHERE orderID = ?`;
+    db.pool.query(updateOrder, [customerID, totalPrice, orderOn, orderID], function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            db.pool.query(selectOrder, [orderID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
 app.put('/put-menu-ajax', function(req,res,next){
     let data = req.body;
 

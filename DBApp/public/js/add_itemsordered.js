@@ -1,5 +1,5 @@
 // Get the objects we need to modify
-let addItemsOrderedForm = document.getElementById('add-itemsordered-form-ajax');
+let addItemsOrderedForm = document.getElementById('add-itemsordered-ajax');
 
 // Modify the objects we need
 addItemsOrderedForm.addEventListener("submit", function (e) {
@@ -18,7 +18,7 @@ addItemsOrderedForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         order: orderValue,
-        menu: menuValue,
+        menu: menuValue
     }
     
     // Setup our AJAX request
@@ -72,8 +72,8 @@ addRowToTable = (data) => {
 
     // Fill the cells with correct data
     idCell.innerText = newRow.itemsorderedID;
-    orderCell.innerText = newRow.order;
-    menuCell.innerText = newRow.menu;
+    orderCell.innerText = newRow.orderID;
+    menuCell.innerText = newRow.menuID;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";

@@ -49,6 +49,30 @@ app.get('/items_ordered', function(req, res)
                 let orders = rows;
                 db.pool.query(query3, function(error, rows, fields){
                     let menuItems = rows;
+                    
+                    let ordersmap = {};
+                    let menusmap = {};
+
+                    orders.map(order =>{
+                        let id = parseInt(order.orderID);
+
+                        ordersmap[id] = order["orderOn"];
+                    })
+
+                    menuItems.map(menuItem => {
+                        let id = parseInt(menuItem.menuID);
+
+                        menusmap[id] = menuItem["item"];
+                    })
+
+                    data = data.map(itemordered => {
+                        return Object.assign(itemordered, {orderID: ordersmap[itemordered.orderID]})
+                    })
+                    
+                    data = data.map(itemordered => {
+                        return Object.assign(itemordered, {menuID: menusmap[itemordered.menuID]})
+                    })
+
                     res.render('items_ordered', {data: data, orders: orders, menuItems: menuItems})
                 })
             })
@@ -73,23 +97,60 @@ app.get('/order_employees', function(req, res){
             let orders = rows;
             db.pool.query(query3, function(error, rows, fields){
                 let employees = rows;
+
+                let ordersmap = {};
+                let employeesmap = {};
+
+                orders.map(order =>{
+                    let id = parseInt(order.orderID);
+
+                    ordersmap[id] = order["orderOn"];
+                })
+
+                employees.map(employee => {
+                    let id = parseInt(employee.employeeID);
+
+                    employeesmap[id] = employee["name"];
+                })
+
+                data = data.map(orderEmployee => {
+                    return Object.assign(orderEmployee, {orderID: ordersmap[orderEmployee.orderID]})
+                })
+
+                data = data.map(orderEmployee => {
+                    return Object.assign(orderEmployee, {employeeID: employeesmap[orderEmployee.employeeID]})
+                })
+
                 res.render('order_employees', {data: data, orders: orders, employees: employees})
             })
         })
     })
     });
 
-app.get('/orders', function(req, res){
-    let query1 = ("SELECT * FROM Orders;");
-    let query2 = ("SELECT * FROM Customers;");
-    db.pool.query(query1, function(error, rows, fields){
-        let data = rows;
-        db.pool.query(query2, function(error, rows, fields){
-            let customers = rows;
-            res.render('orders', {data: data, customers: customers});
+    app.get('/orders', function(req, res){
+        let query1 = ("SELECT * FROM Orders;");
+        let query2 = ("SELECT * FROM Customers;");
+        db.pool.query(query1, function(error, rows, fields){
+            let data = rows;
+            db.pool.query(query2, function(error, rows, fields){
+    
+                let customers = rows;
+                let customermap = {}
+    
+                customers.map(customer => {
+                    let id = parseInt(customer.customerID, 10);
+    
+                    customermap[id] = customer["name"];
+                })
+    
+                data = data.map(order => {
+                    return Object.assign(order, {customerID: customermap[order.customerID]})
+                })
+                
+                res.render('orders', {data: data, customers: customers});
+            })
         })
-    })
-    });
+        });
 
 app.get('/recipes', function(req, res)
     {
@@ -230,7 +291,42 @@ app.post('/add-order-employee-ajax', function(req, res){
                 // If all went well, send the results of the query back.
                 else
                 {
-                    res.send(rows);
+                    data = rows;
+
+                    let query3 = ("SELECT * FROM Orders;");
+                    let query4 = ("SELECT * FROM Employees;");
+
+                    db.pool.query(query3, function(error, rows, fields){
+                        orders = rows;
+                        db.pool.query(query4, function(error, rows, fields){
+                            employees = rows;
+
+                            let ordersmap = {};
+                            let employeesmap = {};
+
+                            orders.map(order =>{
+                                let id = parseInt(order.orderID);
+
+                                ordersmap[id] = order["orderOn"];
+                            })
+
+                            employees.map(employee => {
+                                let id = parseInt(employee.employeeID);
+
+                                employeesmap[id] = employee["name"];
+                            })
+
+                            data = data.map(orderEmployee => {
+                                return Object.assign(orderEmployee, {orderID: ordersmap[orderEmployee.orderID]})
+                            })
+
+                            data = data.map(orderEmployee => {
+                                return Object.assign(orderEmployee, {employeeID: employeesmap[orderEmployee.employeeID]})
+                            })
+
+                            res.send(data);
+                        })
+                    })
                 }
             })
         }
@@ -266,7 +362,25 @@ app.post('/add-order-ajax', function(req, res){
                 // If all went well, send the results of the query back.
                 else
                 {
-                    res.send(rows);
+                    let data = rows;
+                    let query3 = ("SELECT * FROM Customers;");
+
+                    db.pool.query(query3, function(error, rows, fields){
+                        let customers = rows;
+                        let customermap = {}
+            
+                        customers.map(customer => {
+                            let id = parseInt(customer.customerID, 10);
+            
+                            customermap[id] = customer["name"];
+                        })
+            
+                        data = data.map(order => {
+                            return Object.assign(order, {customerID: customermap[order.customerID]})
+                        })
+
+                        res.send(data);
+                    })
                 }
             })
         }
@@ -358,7 +472,42 @@ app.post('/add-itemsordered-ajax', function(req, res)
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    res.send(rows);
+                    let data = rows;
+
+                    let query3 = ("SELECT * FROM Orders;");
+                    let query4 = ("SELECT * FROM MenuItems;");
+
+                    db.pool.query(query3, function(error, rows, fields){
+                        let orders = rows;
+                        db.pool.query(query4, function(error, rows, fields){
+                            let menuItems = rows;
+
+                            let ordersmap = {};
+                            let menusmap = {};
+
+                            orders.map(order =>{
+                                let id = parseInt(order.orderID);
+
+                                ordersmap[id] = order["orderOn"];
+                            })
+
+                            menuItems.map(menuItem => {
+                                let id = parseInt(menuItem.menuID);
+
+                                menusmap[id] = menuItem["item"];
+                            })
+
+                            data = data.map(itemordered => {
+                                return Object.assign(itemordered, {orderID: ordersmap[itemordered.orderID]})
+                            })
+                            
+                            data = data.map(itemordered => {
+                                return Object.assign(itemordered, {menuID: menusmap[itemordered.menuID]})
+                            })
+
+                             res.send(data);
+                        })
+                    })
                 }
             })
         }
@@ -609,7 +758,26 @@ let selectCustomer = `SELECT * FROM Customers WHERE customerID = ?`
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    res.send(rows);
+                    let data = rows;
+                    let query = ("SELECT * FROM Customers;");
+                    
+                    db.pool.query(query, function(error, rows, fields){
+                        
+                        let customers = rows;
+                        let customermap = {}
+            
+                        customers.map(customer => {
+                            let id = parseInt(customer.customerID, 10);
+            
+                            customermap[id] = customer["name"];
+                        })
+            
+                        data = data.map(order => {
+                            return Object.assign(order, {customerID: customermap[order.customerID]})
+                        })
+                        
+                        res.send(data);
+                    })
                 }
             })
         }

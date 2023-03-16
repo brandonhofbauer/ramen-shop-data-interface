@@ -101,7 +101,7 @@ addRowToTable = (data) => {
 
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
-    option.text = newRow.name;
+    option.text = newRow.orderID;
     option.value = newRow.orderID;
     selectMenu.add(option);
 }

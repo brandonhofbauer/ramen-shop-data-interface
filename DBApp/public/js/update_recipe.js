@@ -75,17 +75,17 @@ function updateRow(data, recipeID){
 
             // Get td to update and reassign to value
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
-            td1.innerHTML = parsedData[0].menu; 
+            td1.innerHTML = parsedData[0].menuID; 
 
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
-            td2.innerHTML = parsedData[0].inventory; 
+            td2.innerHTML = parsedData[0].inventoryID; 
 
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
             td3.innerHTML = parsedData[0].reqAmt; 
        }
     }
 
-    updateDropDownMenu(recipeID, parsedData[0].menu, parsedData[0].menu.inventory);
+    updateDropDownMenu(recipeID, parsedData[0].menuID, parsedData[0].inventoryID);
 }
 
 function updateDropDownMenu(recipeID, menu, inventory){

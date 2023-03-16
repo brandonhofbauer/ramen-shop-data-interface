@@ -161,8 +161,29 @@ app.get('/recipes', function(req, res)
             let data = rows;
             db.pool.query(query2, function(error, rows, fields){
                 let menuItems = rows;
+                let menumap = {};
+
+                menuItems.map(menu => {
+                    let id = parseInt(menu.menuID, 10);
+                    menumap[id] = menu["item"];
+                })
+
+                data = data.map(recipe => {
+                    return Object.assign(recipe, {menuID: menumap[recipe.menuID]})
+                })
                 db.pool.query(query3, function(error, rows, fields){
                     let inventoryItems = rows;
+                    let inventorymap = {};
+
+                    inventoryItems.map(inventory => {
+                        let id = parseInt(inventory.inventoryID, 10);
+                        inventorymap[id] = inventory["item"]
+                    })
+
+                    data = data.map(recipe => {
+                        return Object.assign(recipe, {inventoryID: inventorymap[recipe.inventoryID]})
+                    })
+
                     res.render('recipes', {data: data, menuItem: menuItems, inventoryItem: inventoryItems});
                 })
             })

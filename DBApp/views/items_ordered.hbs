@@ -44,12 +44,20 @@
 <h2>Add a Item to an Order</h2>
 <p>To add an item to an existing order, please enter the information below and click 'Submit'!</p>
 <form id="add-itemsordered-ajax">
-    <label for="input-order">Order (an existing one!): </label>
-    <input type="text" name="input-order" id="input-order">
+    <label for="input-order">Order: </label>
+    <select name="input-order" id="input-order">
+        <option value="None">Select an Order</option>
+        {{#each orders}}
+        <option value="{{this.orderID}}">{{this.orderOn}} (ID: {{this.orderID}})</option>
+        {{/each}}
+    </select>
     
     <label for="input-menu">Menu Item: </label>
-    <input type="text" name="input-menu" id="input-menu">
-
+    <select name="input-menu" id="input-menu">
+        {{#each menuItems}}
+        <option value="{{this.menuID}}">{{this.item}} (ID: {{this.menuID}})</option>
+        {{/each}}
+    </select>
     <input type="submit">
 </form>
 

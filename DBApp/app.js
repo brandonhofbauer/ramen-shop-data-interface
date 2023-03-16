@@ -41,10 +41,19 @@ app.get('/employees', function(req, res){
 app.get('/items_ordered', function(req, res)
     {
         let query1 = "SELECT * FROM Items_Ordered;";
+        let query2 = "SELECT * FROM Orders";
+        let query3 = "SELECT * FROM MenuItems";
         db.pool.query(query1, function(error, rows, fields){
-            res.render('items_ordered', {data: rows});
+            let data = rows;
+            db.pool.query(query2, function(error, rows, fields){
+                let orders = rows;
+                db.pool.query(query3, function(error, rows, fields){
+                    let menuItems = rows;
+                    res.render('items_ordered', {data: data, orders: orders, menuItems: menuItems})
+                })
+            })
         })
-    });
+        });
 
 app.get('/menuitems', function(req, res)
     {
@@ -85,8 +94,17 @@ app.get('/orders', function(req, res){
 app.get('/recipes', function(req, res)
     {
         let query1 = "SELECT * FROM Recipes;";
+        let query2 = "SELECT * FROM MenuItems;"
+        let query3 = "SELECT * FROM InventoryItems;"
         db.pool.query(query1, function(error, rows, fields){
-            res.render('recipes', {data: rows});
+            let data = rows;
+            db.pool.query(query2, function(error, rows, fields){
+                let menuItems = rows;
+                db.pool.query(query3, function(error, rows, fields){
+                    let inventoryItems = rows;
+                    res.render('recipes', {data: data, menuItem: menuItems, inventoryItem: inventoryItems});
+                })
+            })
         })
     });
 

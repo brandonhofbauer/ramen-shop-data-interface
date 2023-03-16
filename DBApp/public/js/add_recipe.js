@@ -77,8 +77,8 @@ addRowToTable = (data) => {
 
     // Fill the cells with correct data
     idCell.innerText = newRow.recipeID;
-    menuCell.innerText = newRow.menu;
-    inventoryCell.innerText = newRow.inventory;
+    menuCell.innerText = newRow.menuID;
+    inventoryCell.innerText = newRow.inventoryID;
     reqAmtCell.innerText = newRow.reqAmt;
 
     deleteCell = document.createElement("button");

@@ -470,7 +470,38 @@ app.post('/add-recipe-ajax', function(req, res)
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    res.send(rows);
+                    data = rows;
+                    let query3 = ("SELECT * FROM MenuItems;");
+                    let query4 = ("SELECT * FROM InventoryItems;");
+                    db.pool.query(query3, function(error, rows, fields){
+                        menuItems = rows;
+                        db.pool.query(query4, function(error, rows, fields){
+                            inventoryItems = rows;
+                            
+                            let menumap = {};
+                            let inventorymap = {};
+
+                            menuItems.map(menu => {
+                                let id = parseInt(menu.menuID, 10);
+                                menumap[id] = menu["item"];
+                            })
+
+                            inventoryItems.map(inventory => {
+                                let id = parseInt(inventory.inventoryID, 10);
+                                inventorymap[id] = inventory["item"];
+                            })
+
+                            data = data.map(recipe => {
+                                return Object.assign(recipe, {menuID: menumap[recipe.menuID]})
+                            })
+
+                            data = data.map(recipe => {
+                                return Object.assign(recipe, {inventoryID: inventorymap[recipe.inventoryID]})
+                            })
+
+                            res.send(data);
+                        })
+                    })
                 }
             })
         }
@@ -566,14 +597,14 @@ app.delete('/delete-customer-ajax', function(req,res,next){
               }
   })});
 
-  app.delete('/delete-employee-ajax/', function(req,res,next){
+app.delete('/delete-employee-ajax/', function(req,res,next){
     let data = req.body;
     let employeeID = parseInt(data.id);
     //let updateOrders = `UPDATE Orders SET employeeID = NULL WHERE employeeID = ?`;
     let deleteEmployee= `DELETE FROM Employees WHERE employeeID = ?`;
-  
-  
-          // Run the 1st query
+
+
+        // Run the 1st query
             db.pool.query(deleteEmployee, [employeeID], function(error, rows, fields) {
                 if (error) {
                     console.log(error);
@@ -583,6 +614,7 @@ app.delete('/delete-customer-ajax', function(req,res,next){
                 }
             })
         });
+
 app.delete('/delete-order-employee-ajax/', function(req,res,next){
     let data = req.body;
     let orderemployeesID = parseInt(data.orderemployeesID);
@@ -599,23 +631,24 @@ app.delete('/delete-order-employee-ajax/', function(req,res,next){
                 }
             })
     });
-  app.delete('/delete-order-ajax/', function(req,res,next){
-    let data = req.body;
-    let orderID = parseInt(data.id);
-    let deleteOrder= `DELETE FROM Orders WHERE orderID = ?`;
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteOrder, [orderID], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              else {res.sendStatus(204)}
-  })});
+
+app.delete('/delete-order-ajax/', function(req,res,next){
+let data = req.body;
+let orderID = parseInt(data.id);
+let deleteOrder= `DELETE FROM Orders WHERE orderID = ?`;
+
+
+        // Run the 1st query
+        db.pool.query(deleteOrder, [orderID], function(error, rows, fields){
+            if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+            }
+
+            else {res.sendStatus(204)}
+})});
 
 app.delete('/delete-menu-ajax', function(req,res,next){
     let data = req.body;
@@ -879,10 +912,41 @@ app.put('/put-recipe-ajax', function(req,res,next){
                             console.log(error);
                             res.sendStatus(400);
                         } else {
-                            res.send(rows);
-                        }
-                    })
-                }
+                            let data = rows;
+                            let query3 = ("SELECT * FROM MenuItems;");
+                            let query4 = ("SELECT * FROM InventoryItems;");
+                            db.pool.query(query3, function(error, rows, fields){
+                                let menuItems = rows;
+                                db.pool.query(query4, function(error, rows, fields){
+                                    inventoryItems = rows;
+                            
+                                    let menumap = {};
+                                    let inventorymap = {};
+
+                                    menuItems.map(menu => {
+                                        let id = parseInt(menu.menuID, 10);
+                                        menumap[id] = menu["item"];
+                                    })
+
+                                    inventoryItems.map(inventory => {
+                                        let id = parseInt(inventory.inventoryID, 10);
+                                        inventorymap[id] = inventory["item"];
+                                    })
+
+                                    data = data.map(recipe => {
+                                        return Object.assign(recipe, {menuID: menumap[recipe.menuID]})
+                                    })
+
+                                    data = data.map(recipe => {
+                                        return Object.assign(recipe, {inventoryID: inventorymap[recipe.inventoryID]})
+                                    })
+
+                                    res.send(data);
+                                    })
+                                })
+                            }
+                        })
+                    }
 })});
 
 /*

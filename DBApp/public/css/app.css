@@ -1,0 +1,99 @@
+.App {
+  text-align: right;
+}
+
+.App-footer {
+  block-size: 22px;
+  text-align:center;
+  background-color: bisque;
+}
+
+.App-information {
+  background-color: aquamarine;
+  min-width: 700px;
+  width: auto;
+  text-align: center;
+  outline-style: auto;
+  outline-color: slateblue;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  width: 750px;
+  outline-style: auto;
+  outline-color: violet;
+  margin:auto;
+  background-color:blanchedalmond;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+table{
+  text-align: center;
+  align-items: center;
+  margin:0 auto;
+}
+
+body{
+  background-color:blanchedalmond;
+  text-align: center;
+  align-items: center;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: rgb(255, 243, 223);}
+
+tr:hover {background-color: rgb(208, 199, 184);}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: right;
+  background-color: #04AA6D;
+  color: white;
+}
+
+header{
+  text-align: center;
+  align-items: center;
+}
+
+button{
+  background-color:wheat;
+}
+
+input {
+  background-color: wheat;
+  height: 30px;
+  border-width: 2px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+select {
+  padding-top: 0px;
+  background-color: wheat;
+  height: 36px;
+  border-width: 2px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+button-modify {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding-top: 2px;
+  background-color:wheat;
+  border-color: #04AA6D;
+  color: dimgray;
+  height: 36px;
+}

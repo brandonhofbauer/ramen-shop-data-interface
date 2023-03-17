@@ -1,6 +1,13 @@
 // App.js
 
 /*
+Citation for app.js routes formats:
+Date: 3/17/2023
+Based on OSUs cs340 nodejs-starter-app
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
+
+/*
     SETUP
 */
 var express = require('express');   // We are using the express library for the web server

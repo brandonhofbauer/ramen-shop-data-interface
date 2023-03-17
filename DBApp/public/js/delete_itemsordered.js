@@ -1,3 +1,9 @@
+/*
+Citation for a delete CRUD operation in js:
+Date: 3/17/2023
+Based on OSUs cs340 nodejs-starter-app
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
 function deleteItemsOrdered(itemsorderedID) {
     // Put our data we want to send in a javascript object
     let data = {

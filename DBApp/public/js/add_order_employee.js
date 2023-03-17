@@ -1,3 +1,9 @@
+/*
+Citation for an add CRUD operation in js:
+Date: 3/17/2023
+Based on OSUs cs340 nodejs-starter-app
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
 // Get the objects we need to modify
 let addOrderForm = document.getElementById('add-order-employee-form-ajax');
 

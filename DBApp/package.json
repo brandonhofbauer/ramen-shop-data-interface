@@ -13,6 +13,19 @@
       "express-handlebars": "^6.0.7",
       "forever": "^4.0.3",
       "mysql": "^2.18.1"
-    }
+    },
+    "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "consistent",
+    "jsxSingleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always"
   }
+}
   

@@ -4,7 +4,7 @@
 
 .App-footer {
   block-size: 22px;
-  text-align:center;
+  text-align: center;
   background-color: bisque;
 }
 
@@ -28,57 +28,63 @@
   width: 750px;
   outline-style: auto;
   outline-color: violet;
-  margin:auto;
-  background-color:blanchedalmond;
+  margin: auto;
+  background-color: blanchedalmond;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-table{
+table {
   text-align: center;
   align-items: center;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
-body{
-  background-color:blanchedalmond;
+body {
+  background-color: blanchedalmond;
   text-align: center;
   align-items: center;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-tr:nth-child(even){background-color: rgb(255, 243, 223);}
+tr:nth-child(even) {
+  background-color: rgb(255, 243, 223);
+}
 
-tr:hover {background-color: rgb(208, 199, 184);}
+tr:hover {
+  background-color: rgb(208, 199, 184);
+}
 
 th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: right;
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
 }
 
-header{
+header {
   text-align: center;
   align-items: center;
 }
 
-button{
-  background-color:wheat;
+button {
+  background-color: wheat;
 }
 
 input {
   background-color: wheat;
   height: 30px;
   border-width: 2px;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
 select {
@@ -86,14 +92,16 @@ select {
   background-color: wheat;
   height: 36px;
   border-width: 2px;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
 button-modify {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
   padding-top: 2px;
-  background-color:wheat;
-  border-color: #04AA6D;
+  background-color: wheat;
+  border-color: #04aa6d;
   color: dimgray;
   height: 36px;
 }

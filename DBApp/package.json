@@ -1,31 +1,33 @@
 {
-    "name": "dbapp",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-      "fmt": "prettier --write \"**/*.{ts,js,md,html,css,json}\""
-    },
-    "author": "Brandon Hofbauer",
-    "license": "ISC",
-    "dependencies": {
-      "express": "^4.18.2",
-      "express-handlebars": "^6.0.7",
-      "forever": "^4.0.3",
-      "mysql": "^2.18.1"
-    },
-    "prettier": {
-        "printWidth": 80,
-        "tabWidth": 2,
-        "useTabs": false,
-        "semi": true,
-        "singleQuote": true,
-        "quoteProps": "consistent",
-        "jsxSingleQuote": false,
-        "trailingComma": "es5",
-        "bracketSpacing": true,
-        "bracketSameLine": false,
-        "arrowParens": "always"
-    }
+  "name": "dbapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "fmt": "prettier --write \"**/*.{ts,js,md,html,css,json}\""
+  },
+  "author": "Brandon Hofbauer",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.7",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "consistent",
+    "jsxSingleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.1"
+  }
 }
-  
